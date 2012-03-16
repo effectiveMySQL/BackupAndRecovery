@@ -1,0 +1,55 @@
+--------------------------------------------------------------------------------
+These steps define how to setup your account on a Linux/Mac environment to use 
+Amazon Web Services.
+
+1. Register an AWS account at http://aws.amazon.com/
+
+NOTE: You can also register for a FREE service at http://aws.amazon.com/free/. 
+This provides one free Micro instance.
+
+AWS provides an AWS Management Console that can perform all of the operations
+described here via a web based GUI interface. The following instructions are
+command line based (CLI) to enable scripting and automation.
+
+See http://effectivemysql.com/?  for detailed instructions with screenshots.
+
+2. Obtain access keys
+
+AWS uses different account details to access the various services. Following 
+your account registration you should obtain the following information for later
+use.
+
+  *  AWS Account ID:
+  *  Access Key ID:
+  *  Secret Access Key:
+  *  X.509 Certificate (cert and pk files)
+  *  Canonical User ID:
+
+3. Configure command line EC2 Tools
+
+$ mkdir -p $HOME/aws
+$ cd $HOME/aws
+$ mv ~/Downloads/cert-EPE36OOAUD6QZZVFJCDJTEWFAG2EPWGA.pem  .
+$ mv ~/Downloads/cert-EPE36OOAUD6QZZVFJCDJTEWFAG2EPWGA.pem  .
+$ curl -o ec2-api-tools.zip http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
+$ unzip -q ec2-api-tools.zip 
+$ mkdir -p archive
+$ mv ec2-api-tools.zip archive/
+$ ln -s ec2-api-tools-* ec2
+$ ls -l 
+$ export EC2_HOME=$HOME/aws/ec2
+$ export PATH=$EC2_HOME/bin:$PATH
+$ java -version
+$ export JAVA_HOME=/usr/lib/jvm/java-6-openjdk/
+$ ec2ver
+
+You should see something simlar to the following.
+
+1.5.2.5 2012-03-01
+
+--------------------------------------------------------------------------------
+See http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/ for more 
+information on the CLI tools. The documentation header will also show the 
+version number which should match the output of ec2ver
+
+Official Ubuntu Instructions can be found at https://help.ubuntu.com/community/EC2StartersGuide
