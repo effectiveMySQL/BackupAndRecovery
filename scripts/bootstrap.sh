@@ -33,14 +33,4 @@ sudo dpkg -l | grep mysql
 info ".. Running Version"
 mysql -uroot -p${MYSQL_PWD} -e "SELECT VERSION()" | tail -1
 
-exit 99
-
-sudo service mysql stop
-# get my.cnf
-sudo cp /tmp/my.cnf /etc/mysql
-sudo rm -f /var/lib/mysql/ib_logfile0 /var/lib/mysql/ib_logfile1
-sudo service mysql start
-sudo ls -lh /var/lib/mysql
-sudo tail -20 /var/log/mysql/error.log
-
 exit 0
