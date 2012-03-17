@@ -31,7 +31,7 @@ innodb_flush_log_at_trx_commit=2
 innodb_flush_method=O_DIRECT" > /tmp/my.cnf
 sudo cp /tmp/my.cnf /etc/mysql/conf.d
 
-info "Restart MySQL"
+info "Restarting MySQL"
 (
 sudo service mysql stop
 sudo rm -f /var/lib/mysql/ib_logfile[01]
@@ -39,12 +39,15 @@ sudo service mysql start
 ) >> ${TMP_FILE}
 sudo ls -lh /var/lib/mysql
 
+[ `uname -m` != "x86_64" ] && echo "ERROR: The following steps require a 64bit architecture"
+
 echo "Installing XtraBackup"
 (
 wget http://www.percona.com/redir/downloads/XtraBackup/XtraBackup-1.6.5/deb/oneiric/x86_64/xtrabackup_1.6.5-328.oneiric_amd64.deb
+sudo apt-get install libaio1
 sudo dpkg -i xtrabackup*.deb
 ) >> ${TMP_FILE}
-xtrabackup --help
+xtrabackup --version
 
 
 echo "Installing MySQL Enterprise Backup (MEB)"
@@ -54,17 +57,18 @@ if [ ! -f "meb.zip" ]
 then
   echo "ERROR: Unable to find meb.zip, skipping install"
 else
+  sudo apt-get install unzip >> ${TMP_FILE}
   unzip -q meb.zip 
   sudo mv meb-*/ /opt
   sudo ln -s /opt/meb-*/ /opt/meb
-  /opt/meb/bin/mysqlbackup --help
+  /opt/meb/bin/mysqlbackup --version
 fi
 
 
 info "Installing mydumper"
 (
 sudo apt-get install -y make cmake g++
-sudo apt-get install -y libglib2.0-dev libmysqlclient15-dev zlib1g-dev libpcre3-dev
+sudo apt-get install -y libglib2.0-dev libmysqlclient-dev zlib1g-dev libpcre3-dev
 wget http://launchpad.net/mydumper/0.2/0.2.3/+download/mydumper-0.2.3.tar.gz
 tar xvfz mydumper-0.2.3.tar.gz
 cd mydumper-0.2.3/
@@ -72,7 +76,7 @@ cmake .
 make
 sudo cp mydumper myloader /usr/local/bin
 ) >> ${TMP_FILE}
-mydumper --help
+mydumper --version
 
 
 exit 0
