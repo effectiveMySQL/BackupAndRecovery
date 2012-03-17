@@ -18,7 +18,7 @@ info "Detailed Log file can be found in ${TMP_FILE}"
 info "Configuring user .my.cnf"
 echo "[client]
 user=root
-password=${MYSQL_PASSWORD}" > $HOME/.my.cnf
+password=${MYSQL_PWD}" > $HOME/.my.cnf
 mysql -e "SELECT VERSION()"
 
 info "Configure example server my.cnf"
@@ -70,8 +70,9 @@ tar xvfz mydumper-0.2.3.tar.gz
 cd mydumper-0.2.3/
 cmake .
 make
+sudo cp mydumper myloader /usr/local/bin
 ) >> ${TMP_FILE}
-./mydumper --help
+mydumper --help
 
 
 exit 0
