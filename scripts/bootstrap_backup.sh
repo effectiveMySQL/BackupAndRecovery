@@ -23,8 +23,8 @@ mysql -e "SELECT VERSION()"
 
 info "Configure example server my.cnf"
 echo "[mysqld]
-server-id = 1
-log-bin
+server-id= 1
+log-bin=mysql-bin
 innodb_buffer_pool_size=500M
 innodb_log_file_size=64M
 innodb_flush_log_at_trx_commit=2
@@ -34,14 +34,14 @@ sudo cp /tmp/my.cnf /etc/mysql/conf.d
 info "Restarting MySQL"
 (
 sudo service mysql stop
-sudo rm -f /var/lib/mysql/ib_logfile[01]
+sudo rm -f /var/lib/mysql/ib_logfile0 /var/lib/mysql/ib_logfile1
 sudo service mysql start
 ) >> ${TMP_FILE}
 sudo ls -lh /var/lib/mysql
 
 [ `uname -m` != "x86_64" ] && echo "ERROR: The following steps require a 64bit architecture"
 
-echo "Installing XtraBackup"
+info "Installing XtraBackup"
 (
 rm -f xtrabackup*
 wget http://www.percona.com/redir/downloads/XtraBackup/XtraBackup-1.6.5/deb/oneiric/x86_64/xtrabackup_1.6.5-328.oneiric_amd64.deb
@@ -51,19 +51,20 @@ sudo dpkg -i xtrabackup*.deb
 xtrabackup --version
 
 
-echo "Installing MySQL Enterprise Backup (MEB)"
-echo "Please download MEB from https://edelivery.oracle.com/ and rename to meb.zip in $HOME"
+info "Installing MySQL Enterprise Backup (MEB)"
+info "Please download MEB from https://edelivery.oracle.com/ and rename to meb.zip in $HOME"
 read X
 if [ ! -f "meb.zip" ] 
 then
   echo "ERROR: Unable to find meb.zip, skipping install"
 else
-  sudo apt-get install unzip >> ${TMP_FILE}
-  unzip -q meb.zip 
-
   # Cleanup if rerun
+  rm -rf meb-*
   sudo rm -f /opt/meb   
   sudo rm -rf /opt/meb-*
+
+  sudo apt-get install unzip >> ${TMP_FILE}
+  unzip -q meb.zip 
 
   sudo mv meb-*/ /opt
   sudo ln -s /opt/meb-*/ /opt/meb
