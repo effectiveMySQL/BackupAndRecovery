@@ -19,7 +19,10 @@ echo ".. world - Employee"
 
 tar xvfz *.tar.gz
 gunzip *.gz
-tar xvfj *.bz2
+for file in `ls *.bz2`
+do
+ tar xvfj $file
+done
 
 mysqladmin create world_myisam
 mysql world_myisam < world-myisam.sql
