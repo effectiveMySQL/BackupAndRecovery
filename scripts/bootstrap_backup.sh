@@ -43,9 +43,10 @@ sudo ls -lh /var/lib/mysql
 
 info "Installing XtraBackup"
 (
-rm -f xtrabackup*
-wget http://www.percona.com/redir/downloads/XtraBackup/XtraBackup-1.6.5/deb/oneiric/x86_64/xtrabackup_1.6.5-328.oneiric_amd64.deb
-sudo apt-get install libaio1
+rm -f xtrabackup* percona-xtrabackup*
+#wget http://www.percona.com/redir/downloads/XtraBackup/XtraBackup-1.6.5/deb/oneiric/x86_64/xtrabackup_1.6.5-328.oneiric_amd64.deb
+wget http://www.percona.com/redir/downloads/XtraBackup/BETA/1.9.2/deb/oneiric/x86_64/percona-xtrabackup_1.9.2-404.oneiric_amd64.deb
+sudo apt-get install -y libaio1
 sudo dpkg -i xtrabackup*.deb
 ) >> ${TMP_FILE} 2>&1
 xtrabackup --version
@@ -78,8 +79,8 @@ sudo apt-get install -y make cmake g++
 sudo apt-get install -y libglib2.0-dev libmysqlclient-dev zlib1g-dev libpcre3-dev
 rm -rf mydumper-*
 wget http://launchpad.net/mydumper/0.2/0.2.3/+download/mydumper-0.2.3.tar.gz
-tar xvfz mydumper-0.2.3.tar.gz
-cd mydumper-0.2.3/
+tar xvfz mydumper*.tar.gz
+cd mydumper-*[0-9]/
 cmake .
 make
 sudo cp mydumper myloader /usr/local/bin
