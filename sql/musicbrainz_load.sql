@@ -1,0 +1,68 @@
+SELECT 'artist';
+TRUNCATE TABLE artist;
+LOAD DATA LOCAL INFILE 'mbdump/artist' INTO TABLE artist
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'artist_type';
+TRUNCATE TABLE artist_type;
+LOAD DATA LOCAL INFILE 'mbdump/artist_type' INTO TABLE artist_type
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'artist_name';
+TRUNCATE TABLE artist_name;
+LOAD DATA LOCAL INFILE 'mbdump/artist_name' INTO TABLE artist_name
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'gender';
+TRUNCATE TABLE gender;
+LOAD DATA LOCAL INFILE 'mbdump/gender' INTO TABLE gender
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'country';
+TRUNCATE TABLE country;
+LOAD DATA LOCAL INFILE 'mbdump/country' INTO TABLE country
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'release';
+TRUNCATE TABLE `release`;
+LOAD DATA LOCAL INFILE 'mbdump/release' INTO TABLE `release`
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'release_name';
+TRUNCATE TABLE release_name;
+LOAD DATA LOCAL INFILE 'mbdump/release_name' INTO TABLE release_name
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'release_group';
+TRUNCATE TABLE release_group;
+LOAD DATA LOCAL INFILE 'mbdump/release_group' INTO TABLE release_group
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'release_group_type';
+TRUNCATE TABLE release_group_type;
+LOAD DATA LOCAL INFILE 'mbdump/release_group_type' INTO TABLE release_group_type
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'track';
+TRUNCATE TABLE track;
+LOAD DATA LOCAL INFILE 'mbdump/track' INTO TABLE track
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'track_name';
+TRUNCATE TABLE track_name;
+LOAD DATA LOCAL INFILE 'mbdump/track_name' INTO TABLE track_name
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'tracklist';
+TRUNCATE TABLE tracklist;
+LOAD DATA LOCAL INFILE 'mbdump/tracklist' INTO TABLE tracklist
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'medium';
+TRUNCATE TABLE medium;
+LOAD DATA LOCAL INFILE 'mbdump/medium' INTO TABLE medium
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'recording';
+TRUNCATE TABLE recording;
+LOAD DATA LOCAL INFILE 'mbdump/recording' INTO TABLE recording
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'artist_credit';
+TRUNCATE TABLE artist_credit;
+LOAD DATA LOCAL INFILE 'mbdump/artist_credit' INTO TABLE artist_credit
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'artist_credit_name';
+TRUNCATE TABLE artist_credit_name;
+LOAD DATA LOCAL INFILE 'mbdump/artist_credit_name' INTO TABLE artist_credit_name
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
+SELECT 'url';
+TRUNCATE TABLE url;
+LOAD DATA LOCAL INFILE 'mbdump/url' INTO TABLE url
+FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';

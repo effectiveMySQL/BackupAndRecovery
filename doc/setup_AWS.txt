@@ -60,10 +60,7 @@ information on the CLI tools. The documentation header will also show the
 version number which should match the output of ec2ver
 
 
-
-
 Other Information
 
 Official Ubuntu Instructions can be found at 
 https://help.ubuntu.com/community/EC2StartersGuide
---------------------------------------------------------------------------------

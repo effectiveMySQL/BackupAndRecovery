@@ -1,0 +1,111 @@
+################################################################################
+# Launch Instance
+#
+$ ec2-run-instances ami-baba68d3 --instance-type m1.large --region us-east-1 --group db --key admin -z us-east-1a
+# Create a Backup Partition
+$ ec2-create-volume ec2-create-volume -s 30 --region us-east-1 -z us-east-1a
+# Attach Volume
+# $ ec2-attach-volume vol-6e856601 -i i-49f21d2e -d /dev/sdm
+#
+################################################################################
+# Connect to Instance
+#
+$ ssh -i admin.pem ubuntu@ec2-XX-XX-XX-XXX.compute-1.amazonaws.com
+#
+# Configure Backup Partition
+$ sudo mkfs -t ext4 /dev/xvdm
+$ cp /etc/fstab /tmp/fstab.new
+$ echo '/dev/xvdm  /mysql  ext4 defaults,noatime 0 0' >> /tmp/fstab.new
+$ sudo cp /tmp/fstab.new /etc/fstab
+$ sudo mkdir /mysql
+$ sudo mount /mysql
+$ df -h
+$ sudo mkdir /mysql/backup
+$ sudo chown ubuntu:ubuntu /mysql/backup
+################################################################################
+#
+# Configure for MySQL
+#
+$ wget https://raw.github.com/effectiveMySQL/BackupAndRecovery/master/scripts/bootstrap.sh
+$ sh ./bootstrap.sh 
+################################################################################
+#
+# Configure for MySQL Backups
+#
+$ wget  https://raw.github.com/effectiveMySQL/BackupAndRecovery/master/scripts/bootstrap_backup.sh
+$ sh ./bootstrap_backup.sh 
+#
+# Configure Disk/Settings for larger size database
+#
+$ sudo service mysql stop
+$ sudo mv /var/lib/mysql /mnt
+$ sudo ln -s /mnt/mysql /var/lib/mysql
+$ sudo rm -f /mnt/mysql/ibdata1 /mnt/mysql/ib_logfile0 /mnt/mysql_iblogfile1
+$ echo "  /mnt/mysql/ r,
+/mnt/mysql/** rwk," > /tmp/usr.sbin.mysqld
+$ sudo mv /tmp/usr.sbin.mysqld /etc/apparmor.d/local/
+$ echo "[mysqld]
+server-id= 1
+log-bin=mysql-bin
+innodb_data_file_path=ibdata1:500M:autoextend
+innodb_buffer_pool_size=500M
+innodb_log_file_size=64M
+innodb_flush_log_at_trx_commit=2
+innodb_flush_method=O_DIRECT
+tmp_table_size=64M
+max_heap_table_size=64M" > /tmp/my.cnf
+$ sudo cp /tmp/my.cnf /etc/mysql/conf.d
+#
+# NOTE: Have to remove bind-address from /etc/mysql/my.cnf for remote backup tests
+#
+$ sudo service apparmor restart
+$ service mysql start
+################################################################################
+#
+# Data Load
+#
+$ sudo apt-get install -y git-core
+$ cd $HOME
+$ git clone git://github.com/effectiveMySQL/BackupAndRecovery.git
+$ echo "[client]
+> user=root
+> password=passwd" > ~/.my.cnf
+$ cd $HOME/BackupAndRecovery/scripts
+$ ./get_mysql_data.sh
+$ ./get_musicbrainz.sh
+
+################################################################################
+#
+# Backup Tests
+#
+$ sudo mkdir /mysql/backup
+$ sudo chown ubuntu:ubuntu /mysql/backup
+$ time mysqldump --all-databases > /mysql/backup/dump1.sql
+$ ls -lh /mysql/backup/dump1.sql 
+$ time gzip /mysql/backup/dump1.sql
+$ time mysqldump --all-databases | gzip > /mysql/backup/dump2.sql.gz
+$ ls -lh /mysql/backup/dump2.sql.gz 
+
+$ mkdir /mysql/backup/meb
+$ mkdir /mysql/backup/xtrabackup
+$ sudo chown mysql:mysql /mysql/backup/meb /mysql/backup/xtrabackup
+$ sudo usermod -m -d /home/mysql -s /bin/bash mysql
+$ sudo su - mysql
+$ time /opt/meb/bin/mysqlbackup --user=root --password=passwd --backup-dir=/mysql/backup/meb/first backup-and-apply-log
+$ time /opt/meb/bin/mysqlbackup --user=root --password=passwd --backup-dir=/mysql/backup/meb/second-compressed --compress backup
+
+$ time innobackupex --defaults-file=/etc/mysql/my.cnf --user=root --password=passwd --no-timestamp /mysql/backup/xtrabackup/first
+
+
+# Streaming Backups
+$ time mysqldump --all-databases | ssh backup "cat - > rdump1.sql"
+$ ssh backup "ls -lh rdump1.sql"
+$ time mysqldump --all-databases | gzip | ssh backup "cat - > rdump2.sql.gz"
+$ ssh backup "ls -lh rdump2.sql.gz"
+$ time mysqldump --all-databases | ssh backup "cat - | gzip > rdump3.sql.gz"
+$ ssh backup "ls -lh rdump3.sql.gz"
+
+
+
+# GRANT ALL PRIVILEGES ON *.* TO 'root'@10.140.11.159 IDENTIFIED BY PASSWORD '*59C70DA2F3E3A5BDF46B68F5C8B8F25762BCCEF0';
+
