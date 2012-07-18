@@ -1,0 +1,151 @@
+This document contains all the web links for the book
+Effective MySQL: Backup and Recovery by Ronald Bradford
+http://effectivemysql.com/book/backup-recovery
+
+
+Introduction
+------------
+
+http://www.mysql.com/about/legal/licensing/index.html
+http://mysql.com
+http://dev.mysql.com
+http://effectivemysql.com/book/backup-recovery/
+
+Chapter 1 - The Five Minute DBA
+---------
+
+http://dev.mysql.com/doc/refman/5.5/en/mysqldump.html
+
+Chapter 2 - Understanding Backup Options
+---------
+
+http://dev.mysql.com/doc/refman/5.5/en/lock-tables.html
+http://dev.mysql.com/doc/refman/5.5/en/flush.html
+http://www.mysqlperformanceblog.com/2012/03/23/how-flush-tables-with-read-lock-works-with-innodb-tables/
+
+http://effectiveMySQL.com/article/configuring-a-new-hard-drive-for-lvm/
+http://effectiveMySQL.com/article/using-mysql-with-lvm
+http://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)
+http://effectiveMySQL.com/article/creating-mysql-backups-using-lvm/
+https://edelivery.oracle.com/
+
+http://dev.mysql.com/doc/mysql-enterprise-backup/3.7/en/mysqlbackup.backup.html
+http://dev.mysql.com/doc/mysql-enterprise-backup/3.7/en/mysqlbackup.privileges.html
+http://www.mysql.com/products/enterprise/backup.html
+http://www.percona.com/downloads/XtraBackup/
+http://www.percona.com/docs/wiki/percona-xtrabackup:xtrabackup:start
+http://www.mydumper.org/
+http://www.zmanda.com/backup-mysql.html
+
+Chapter 3 - Understanding Business Requirements for Disaster Recovery
+---------
+
+http://ronaldbradford.com/blog/never-let-your-binlog-directory-fill-up-2009-07-15/
+http://effectiveMySQL.com/article/real-life-disasters/ 
+
+Chapter 4 - Using MySQL Replication
+---------
+
+http://dev.mysql.com/doc/refman/5.6/en/replication-options-binary-log.html
+http://www.percona.com/software/percona-toolkit/
+ihttp://dev.mysql.com/doc/refman/5.5/en/replication-options-table.html
+http://dev.mysql.com/doc/refman/5.5/en/replication-rbr-safe-unsafe.html
+http://dev.mysql.com/doc/refman/5.5/en/replication-semisync.html
+http://mysqlsandbox.net/
+http://www.percona.com/doc/percona-xtrabackup/innobackupex/replication_ibk.html
+
+http://dev.mysql.com/doc/refman/5.6/en/mysql-nutshell.html
+http://dev.mysql.com/doc/refman/5.6/en/news-5-6-x.html
+
+Chapter 5 - Using Recovery Options
+---------
+
+http://blogs.innodb.com/wp/2010/04/innodb-performance-recovery/
+http://ronaldbradford.com/blog/mysql-is-crashing-what-do-i-do-2010-03-08/
+http://ronaldbradford.com/blog/how-to-crash-mysqld-intentionally-2010-03-05/
+http://dev.mysql.com/doc/refman/5.5/en/mysqldump.html
+http://www.percona.com/doc/percona-xtrabackup/
+http://code.google.com/p/xtrabackup-manager/wiki/QuickStartGuide
+http://dev.mysql.com/doc/refman/5.5/en/mysqlbinlog.html
+http://dev.mysql.com/doc/refman/5.6/en/mysqlbinlog-backup.html
+http://ronaldbradford.com/blog/checked-your-mysql-recovery-process-recently-2010-02-15/
+
+Chapter 6 - MySQL Configuration Options
+---------
+
+http://dev.mysql.com/doc/refman/5.5/en/innodb-parameters.html#sysvar_ innodb_flush_log_at_trx_commit
+
+Chapter 7 - Disaster Scenarios
+---------
+
+http://www.datacenterknowledge.com/archives/2009/02/19/magnolia-data-is-gone-for-good/
+
+http://blogs.skysql.com/2011/05/innodb-data-recovery-success-story.html
+https://launchpad.net/percona-data-recovery-tool-for-innodb
+http://www.chriscalender.com/?p=49
+http://dev.mysql.com/doc/refman/5.5/en/mysql-command-options.html#option_mysql_safe-updates
+
+http://dev.mysql.com/doc/refman/5.5/en/replication-options-slave.html#sysvar_sync_relay_log_info
+http://bugs.mysql.com/bug.php?id=33048
+
+http://it.toolbox.com/blogs/database-soup/a-san-is-not-a-highavailability-solution-47644
+http://www.percona.com/about-us/mysql-white-paper/causes-of-downtime-in-production-mysql-servers
+
+http://www.mysql.com/support/
+http://www.skysql.com/
+http://fromdual.com/
+http://www.pythian.com/
+http://www.bluegecko.net/
+http://www.percona.com/
+http://openquery.com/
+http://palominodb.com/
+http://effectivemysql.com/
+http://www.continuent.com/
+
+http://www.worldbackupday.com/
+
+Chapter 8  - Optimizing Backup and Recovery
+---------
+
+http://aws.amazon.com/ec2/instance-types/
+http://effectivemysql.com/article/setting-up-amazon-web-services/ • http://effectivemysql.com/article/using-amazon-web-services/
+
+http://dev.mysql.com/doc/ mysql-enterprise-backup/3.7/en/meb-backup-tape.html
+http://www.percona.com/
+doc/percona-xtrabackup/howtos/recipes_ibkx_stream.html.
+http://www.mydumper.org/
+http://devmysql.com/doc/mysql-enterprise-backup/3.7/en/mysqlbackup.incremental.html
+https://blogs.oracle.com/MySQL/entry/mysql_enterprise_backup_taking_incremental
+http://dev.mysql.com/doc/mysql-enterprise-backup/3.7/en/backup-incremental-options.html
+https://blogs.oracle.com/MySQL/entry/mysql_enterprise_backup_redo_log.
+http://dev.mysql.com/doc/mysql-enterprise-backup/3.7/en/backup-partial-options.html
+http://www.percona.com/doc/percona- xtrabackup/innobackupex/importing_exporting_tables_ibk.html
+http://dev.mysql.com/doc/refman/5.5/en/ secure-connections.html
+http://dev.mysql.com/doc/refman/5.5/en/replication-solutions-ssl.html
+
+http://www.gazzang.com/
+http://mikefrank.wordpress.com/tag/mysql-mysqldump-ezncrypt-gazzang-linux-backup-xtrabackup-transparent-encryption/
+http://blog.gazzang.com/request-a-free-trial-of-ezncrypt/
+
+Chapter 9 - MySQL in the Cloud
+---------
+
+http:/allthingsdistributed.com/
+http://effectivemysql.com/article/setting-up-aws-rds/
+ttp://datacharmer.blogspot.com/2012/04/few-hacks-to-simulate-mysqldump-ignore.html
+http://www.markleith.co.uk/?p=768
+http://bugs.mysql.com/bug.php?id=3228
+http://aws.amazon.com/rds/
+
+http://effectiveMySQL.com/article/setting-up-google-cloud-sql/
+https://developers.google.com/cloud-sql/
+
+http://hpcloud.com
+http://openstack.org/
+http://wiki.openstack.org/DatabaseAsAService
+http://www.percona.com/software/percona-server/
+http://www.hpcloud.com/products/RDB
+
+
+http://techblog.netflix.com/2010/12/5-lessons-weve-learned-using-aws.html
+http://techblog.netflix.com/2011/07/netflix-simian-army.html 
